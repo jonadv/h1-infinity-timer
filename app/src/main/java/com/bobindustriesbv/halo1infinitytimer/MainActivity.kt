@@ -30,7 +30,7 @@ import kotlin.math.roundToLong
 
 class MainActivity : AppCompatActivity (){
     private companion object {
-        var boDbg = true
+        var boDbg = false
         var boDbgTxt = false
         const val iDbg_AddedAtStart_Seconds: Long = 0//45
         const val iDbg_AddedAtStart_Minutes: Long = 0//13
