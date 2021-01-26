@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="countdown_on_bottom" >Afteller beneden</string>
+    <string name="countdown_on_top" >Afteller boven</string>
+    <string name="counting_down_from_one_minute">Telt af vanaf 1 minuut</string>
+    <string name="counting_down_from_two_minutes">Telt af vanaf 2 minuten</string>
+    <string name="counting_down_from_few_minutes">Telt af vanaf %d minuten</string>
+    <string name="counting_down_from_other_minutes">Telt af vanaf %d minuten</string>
+    <string name="exit_press_again">Druk nogmaals om af te sluiten</string>
+    <string name="long_press_to_reset">Ingedrukt houden om te resetten</string>
+    <string name="one_second">seconde</string>
+    <string name="resets_from_zero">Herstart vanaf 00:00</string>
+    <string name="settings_back_to_default">Alle instellingen gereset</string>
+    <string name="starts_and_restarts_from">Begint en herstart vanaf 00:0</string>
+    <string name="starts_from_many">Begint vanaf %d seconden</string>
+    <string name="tutorial_1_first_press_circle_title">Eenmalige tutorial</string>
+    <string name="tutorial_1_first_press_circle">Tik op de cirkels om door te gaan</string>
+    <string name="tutorial_2_minsetting_title">Wijzig map</string>
+    <string name="tutorial_2_minsetting">Stel de afteltimer in op aftellen vanaf 1, 2 of 3 minuten, voor of nadat de timer is gestart</string>
+    <string name="tutorial_3_add_title">Synchroniseer de timer vooraf</string>
+    <string name="tutorial_3_add">Voeg vooraf een paar seconden toe om deze met het spel te synchroniseren</string>
+    <string name="tutorial_4_start_title">Start of herstart de timer</string>
+    <string name="tutorial_5_swipe_title">Synchroniseer TIJDENS het spel</string>
+    <string name="tutorial_5_swipe">Als de timer loopt, veeg naar links om een seconde terug te gaan of veeg naar rechts om er een toe te voegen</string>
+    <string name="tutorial_6_switch_title">Wissel timers</string>
+    <string name="tutorial_6_switch">Veeg omhoog of omlaag om de afteller bovenaan of onderaan weer te geven</string>
+    <string name="tutorial_7_close_title">Dat was het</string>
+    <string name="tutorial_7_close">Voor meer info zie \'halonades.com/timer\'</string>
+</resources>

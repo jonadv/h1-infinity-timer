@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="countdown_on_bottom">Countdown unten</string>
+    <string name="countdown_on_top">Countdown oben</string>
+    <string name="counting_down_from_one_minute">Runterzählen von 1 Minute</string>
+    <string name="counting_down_from_two_minutes">Runterzählen von 2 Minuten</string>
+    <string name="counting_down_from_few_minutes">Runterzählen von %d Minuten</string>
+    <string name="counting_down_from_other_minutes">Runterzählen von %d Minuten</string>
+    <string name="exit_press_again">Zum verlassen erneut drücken</string>
+    <string name="long_press_to_reset">Gedrückt halten für Reset</string>
+    <string name="one_second">Sekunde</string>
+    <string name="resets_from_zero">Neustart bei 00:00</string>
+    <string name="settings_back_to_default">Alle Einstellungen wurden zurückgesetzt</string>
+    <string name="starts_and_restarts_from">Startet und neustart bei 00:0</string>
+    <string name="starts_from_many">Started bei %d Sekunden</string>
+    <string name="maps_minute_one">Derelict (Verlassen) \nLongest (Der Längste Gang) \nWizard (Magier)</string>
+    <string name="maps_minute_two">Chill out (Chillen) \nPrisoner (Gefangen) \nDamnation (Verdamnis) \nBattle Creek (Schlachtenbach)</string>
+    <string name="maps_minute_three">Hang \'m High (Hängt Sie Höher) \nRat Race (Rattenrennen) \nBlood Gulch (Blutschlucht)</string>
+    <string name="tutorial_1_first_press_circle_title">Einmaliges Tutorial</string>
+    <string name="tutorial_1_first_press_circle">Tippen Sie auf die Kreise, um fortzufahren</string>
+    <string name="tutorial_2_minsetting_title">Karteneinstellungen</string>
+    <string name="tutorial_2_minsetting">Stellen Sie den Timer so ein, dass er von 1, 2 oder 3 Minuten herunterzählt. Kann bei laufendem Timer geändert werden.</string>
+    <string name="tutorial_5_swipe_title">Synchronisiere den Timer WÄHREND des Spiels</string>
+    <string name="tutorial_5_swipe">Wischen Sie bei laufendem Timer nach links, um eine Sekunde zu subtrahieren, oder nach rechts, um eine Sekunde hinzuzufügen.</string>
+    <string name="tutorial_6_switch_title">Timer wechseln</string>
+    <string name="tutorial_6_switch">Wischen Sie nach oben oder unten, um den Countdown oben oder unten anzuzeigen.</string>
+    <string name="tutorial_7_close">Weitere Informationen finden Sie unter \'halonades.com/timer\'.</string>
+    <string name="tutorial_3_add">Fügen Sie einige Sekunden hinzu, bevor Sie den Timer starten, um ihn mit dem Spiel zu synchronisieren.</string>
+    <string name="tutorial_3_add_title">Synchronisieren Sie den Timer vor dem Start</string>
+    <string name="tutorial_4_start_title">Starten oder starten Sie den Timer neu</string>
+    <string name="tutorial_7_close_title">Das war es</string>
+</resources>

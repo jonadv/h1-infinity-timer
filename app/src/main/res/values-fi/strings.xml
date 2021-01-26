@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="countdown_on_bottom" >Sijainti ruudun alalaidassa</string>
+    <string name="countdown_on_top">Lähtölaskenta yläosassa</string>
+    <string name="counting_down_from_one_minute">Lasketaan taaksepäin 1 minuutista</string>
+    <string name="counting_down_from_two_minutes">Lasketaan taaksepäin 2 minuutista</string>
+    <string name="counting_down_from_few_minutes">Lasketaan taaksepäin %d minuutista</string>
+    <string name="counting_down_from_other_minutes">Lasketaan taaksepäin %d minuutista</string>
+    <string name="exit_press_again">Paina kahdesti poistuaksesi</string>
+    <string name="long_press_to_reset">Nollaa pitämällä painiketta pohjassa</string>
+    <string name="one_second">sekunti</string>
+    <string name="resets_from_zero">Nollatessa ajastin aloittaa uudelleen 00:00 kohdalta.</string>
+    <string name="settings_back_to_default">Oletusasetukset palautettu</string>
+    <string name="starts_and_restarts_from">Käynnistettäessä ja nollattaessa ajastin aloittaa kohdasta 00:0</string>
+    <string name="starts_from_many">Laskenta alkaa %d sekunnin kohdalta</string>
+    <string name="tutorial_1_first_press_circle_title">Kerran opetusohjelma</string>
+    <string name="tutorial_1_first_press_circle">Napauta piirejä jatkaaksesi</string>
+    <string name="tutorial_2_minsetting_title">Vaihda kartta</string>
+    <string name="tutorial_2_minsetting">Aseta ajastin laskemaan 1, 2 tai 3 minuutista. Voidaan muuttaa ajastimen ollessa käynnissä.</string>
+    <string name="tutorial_3_add_title">Synkronoi ajastin ennen aloitusta</string>
+    <string name="tutorial_3_add">Lisää muutama sekunti ennen ajastimen käynnistämistä synkronoidaksesi sen pelin kanssa</string>
+    <string name="tutorial_4_start_title">Käynnistä tai käynnistä ajastin</string>
+    <string name="tutorial_5_swipe_title">Synkronoi ajastin pelin aikana</string>
+    <string name="tutorial_5_swipe">Kun ajastin on käynnissä, pyyhkäise vasemmalle vähentääksesi toisen tai liu\'uta oikealle lisätäksesi toisen</string>
+    <string name="tutorial_6_switch_title">Vaihda ajastimet</string>
+    <string name="tutorial_6_switch">Pyyhkäise ylös tai alas näyttääksesi lähtölaskurin ylä- tai alareunassa</string>
+    <string name="tutorial_7_close_title">Se siitä</string>
+    <string name="tutorial_7_close">Lisätietoja on sivustossa \'halonades.com/timer\'</string>
+</resources>

@@ -1,0 +1,58 @@
+<resources
+    xmlns:tools="http://schemas.android.com/tools">
+    <string name="countdown_on_bottom">Countdown on bottom</string>
+    <string name="countdown_on_top">Countdown on top</string>
+    <string name="counting_down_from_one_minute">Counting down from 1 minute</string>
+    <string name="counting_down_from_two_minutes">Counting down from 2 minutes</string>
+    <string name="counting_down_from_few_minutes" tools:ignore="PluralsCandidate">Counting down from %d minutes</string>
+    <string name="counting_down_from_other_minutes" tools:ignore="PluralsCandidate">Counting down from %d minutes</string>
+    <string name="exit_press_again" >Press again to exit</string>
+    <string name="long_press_to_reset">Long press to reset</string>
+    <string name="one_second">second</string>
+    <string name="maps_minute_one" tools:ignore="MissingTranslation">Derelict \nLongest \nWizard</string>
+    <string name="maps_minute_two" tools:ignore="MissingTranslation">Chill out \nPrisoner \nDamnation \nBattle Creek</string>
+    <string name="maps_minute_three" tools:ignore="MissingTranslation">Hang \'m High \nRat Race \nBlood Gulch</string>
+    <string name="resets_from_zero">Restarts from 00:00</string>
+    <string name="settings_back_to_default">All settings back to default</string>
+    <string name="starts_and_restarts_from">Starts and restarts from 00:0</string>
+    <string name="starts_from_many" tools:ignore="PluralsCandidate">Starts %d seconds in</string>
+
+    <plurals name="counting_down_from_minute" >
+        <item quantity="one">@string/counting_down_from_one_minute</item>
+        <item quantity="two">@string/counting_down_from_two_minutes</item>
+        <item quantity="few">@string/counting_down_from_few_minutes</item>
+        <item quantity="other">@string/counting_down_from_other_minutes</item>
+    </plurals>
+    <plurals name="starts_from_many" >
+        <item quantity="other">@string/starts_from_many</item>
+    </plurals>
+    <string name="app_name" translatable="false">H1 Infinity Timer</string>
+    <string name="_00_00" translatable="false">00:00</string>
+    <string name="_2_00" translatable="false">2:00</string>
+    <string name="timer_reached_infinity" translatable="false">Not in a billion years! Infinity reached. Congrats, or something..</string>
+    <string name="error_saving_preferences" translatable="false">Error saving starttime and preferences</string>
+    <string name="error_getting_preferences" translatable="false">Error setting saved starttime and preferences</string>
+    <string name="error_audio_creating" translatable="false">Something went with the setting audio cues. Restart app, time won\'t be lost.</string>
+    <string name="error_audio_releasing" translatable="false">Something went wrong releasing the media.</string>
+    <string name="error_audio_playing_sound" translatable="false">Could not play audio cue(s) even though it released and recreated them. Restart app?</string>
+    <string name="error_timer_start" translatable="false">Error starting timer. Restart app, it will remember how to count again.</string>
+    <string name="error_timer_stop" translatable="false">Error stopping timer. Restart app if time does not tick after start.</string>
+    <string name="error_timer_ticking" translatable="false">Error updating UI or playing sounds on tick.</string>
+    <string name="error_updating_times" translatable="false">Error updating times.</string>
+    <string name="error_showing_buttons" translatable="false">Error changing visibility of buttons</string>
+    <string name="error_toast" translatable="false">Error showing toasts, like this one.. Restart app?</string>
+    <string name="error_tutor_tutorial" translatable="false">Error running tutorial. Figure it out yourself. :)</string>
+    <string name="tutorial_1_first_press_circle_title">One time tutorial</string>
+    <string name="tutorial_1_first_press_circle">Tap the circles to continue</string>
+    <string name="tutorial_2_minsetting_title">Change map</string>
+    <string name="tutorial_2_minsetting">Set the timer to count down from 1, 2 or 3 minutes. Can be changed while the timer is running.</string>
+    <string name="tutorial_3_add_title">Sync timer before start</string>
+    <string name="tutorial_3_add">Add a few seconds before starting the timer to sync it with the game</string>
+    <string name="tutorial_4_start_title">Start or restart the timer</string>
+    <string name="tutorial_5_swipe_title">Sync timer DURING the game</string>
+    <string name="tutorial_5_swipe">When the timer is running, swipe left to subtract a second or swipe right to add one</string>
+    <string name="tutorial_6_switch_title">Switch timers</string>
+    <string name="tutorial_6_switch">Swipe up or down to show the countdown on top or bottom.</string>
+    <string name="tutorial_7_close_title">That\'s it</string>
+    <string name="tutorial_7_close">For more info see \'halonades.com/timer\'</string>
+</resources>

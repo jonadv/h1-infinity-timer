@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="countdown_on_bottom">Compte à rebours en bas</string>
+    <string name="countdown_on_top">Compte à rebours en haut</string>
+    <string name="counting_down_from_one_minute">Compte à rebours à partir de 1 minute</string>
+    <string name="counting_down_from_two_minutes">Compte à rebours à partir de 2 minutes</string>
+    <string name="counting_down_from_few_minutes">Compte à rebours à partir de %d minutes</string>
+    <string name="counting_down_from_other_minutes">Compte à rebours à partir de %d minutes</string>
+    <string name="exit_press_again">Appuyez à nouveau pour quitter</string>
+    <string name="long_press_to_reset">Appuyez longuement pour réinitialiser</string>
+    <string name="one_second">seconde</string>
+    <string name="resets_from_zero">Redémarre à 00:00</string>
+    <string name="settings_back_to_default">Paramètres par défaut restaurés</string>
+    <string name="starts_and_restarts_from">Démarre et redémarre à partir de 00:0</string>
+    <string name="starts_from_many">Le compte à rebours commence dans %d secondes</string>
+    <string name="maps_minute_three">Hang \'m High (Haut et Court) \nRat Race \nBlood Gulch</string>
+    <string name="tutorial_2_minsetting">Paramétrer le compte à rebours à partir de 1, 2 ou 3 minutes. Peut être modifié en cours d\'utilisation.</string>
+    <string name="tutorial_1_first_press_circle">Appuyez sur les cercles pour continuer</string>
+    <string name="tutorial_2_minsetting_title">Changer les paramètres cartes</string>
+    <string name="tutorial_3_add_title">Synchroniser le timer avant le début de la partie</string>
+    <string name="tutorial_3_add">Ajouter quelques secondes avant de démarrer le timer pour le synchroniser avec la partie</string>
+    <string name="tutorial_4_start_title">Démarrer ou redémarrer le timer</string>
+    <string name="tutorial_5_swipe_title">Synchroniser le timer durant la partie</string>
+    <string name="tutorial_5_swipe">Lorsque le timer est en cours, balayer vers le droite pour ajouter une seconde et vers la gauche pour enlever une seconde</string>
+    <string name="tutorial_7_close_title">C\'est ça</string>
+    <string name="tutorial_7_close">Pour plus d\'informations, voir \'halonades.com/timer\'</string>
+    <string name="tutorial_6_switch_title">Changer le timer</string>
+    <string name="tutorial_1_first_press_circle_title">Tutoriel unique</string>
+    <string name="tutorial_6_switch">Balayez vers le haut ou vers le bas pour déplacer le compte à rebours</string>
+</resources>

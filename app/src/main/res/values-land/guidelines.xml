@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="padding_restart_button_top" >0dp</dimen>
+    <dimen name="padding_restart_button_bottom" >16dp</dimen>
+
+    <item name="glVert_1" format="float" type="dimen">0.2</item>
+    <item name="glVert_2" format="float" type="dimen">0.8</item>
+
+    <item name="glHor_2_BigTime_Bottom" format="float" type="dimen">0.50</item>
+    <item name="glHor_3_SmallTime_Top" format="float" type="dimen">0.40</item>
+    <item name="glHor_4_SmallTime_Bottom" format="float" type="dimen">0.70</item>
+
+</resources>

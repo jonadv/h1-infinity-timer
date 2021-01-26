@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="countdown_on_bottom">Nedtelling nederst</string>
+    <string name="countdown_on_top">Nedtelling øverst</string>
+    <string name="counting_down_from_one_minute">Nedtelling fra 1 minutt</string>
+    <string name="counting_down_from_two_minutes">Nedtelling fra 2 minutter</string>
+    <string name="counting_down_from_few_minutes">Nedtelling fra %d minutter</string>
+    <string name="counting_down_from_other_minutes">Nedtelling fra %d minutter</string>
+    <string name="exit_press_again">Trykk igjen for å avslutte</string>
+    <string name="long_press_to_reset">Trykk lenge for å tilbakestille</string>
+    <string name="one_second">sekund</string>
+    <string name="resets_from_zero">Begynn på nytt fra 00:00</string>
+    <string name="settings_back_to_default">Alle innstillinger er tilbakestilt</string>
+    <string name="starts_and_restarts_from">Start og begynn på nytt fra 00:0</string>
+    <string name="starts_from_many">Start fra %d sekunder</string>
+    <string name="tutorial_1_first_press_circle_title">En gang tutorial</string>
+    <string name="tutorial_1_first_press_circle">Trykk på sirklene for å fortsette</string>
+    <string name="tutorial_2_minsetting_title">Endre kart</string>
+    <string name="tutorial_2_minsetting">Sett tidtakeren til å telle ned fra 1, 2 eller 3 minutter. Kan endres etter at tidtakeren er startet.</string>
+    <string name="tutorial_3_add_title">Synkroniser tidtakeren før start</string>
+    <string name="tutorial_3_add">Legg til noen sekunder før du starter tidtakeren for å synkronisere den med spillet</string>
+    <string name="tutorial_4_start_title">Start eller restart tidtakeren</string>
+    <string name="tutorial_5_swipe_title">Synkroniser timeren under spillet</string>
+    <string name="tutorial_5_swipe">Når tidtakeren kjører, sveiper du til venstre for å trekke fra ett sekund, eller til høyre for å legge til ett</string>
+    <string name="tutorial_6_switch_title">Bytt tidtakere</string>
+    <string name="tutorial_6_switch">Sveip opp eller ned for å vise nedtellingen på toppen eller bunnen</string>
+    <string name="tutorial_7_close_title">Det er det</string>
+    <string name="tutorial_7_close">For mer informasjon, se \'halonades.com/timer\'</string>
+</resources>

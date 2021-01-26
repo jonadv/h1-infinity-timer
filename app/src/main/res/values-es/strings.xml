@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="countdown_on_bottom">La cuenta regresiva se muestra abajo</string>
+    <string name="countdown_on_top">La cuenta regresiva se muestra arriba</string>
+    <string name="counting_down_from_one_minute">Contando atrás desde 1 minuto</string>
+    <string name="counting_down_from_two_minutes">Contando atrás desde 2 minutos</string>
+    <string name="counting_down_from_few_minutes">Contando atrás desde %d minutos</string>
+    <string name="counting_down_from_other_minutes">Contando atrás desde %d minutos</string>
+    <string name="exit_press_again">Presione nuevamente para salir</string>
+    <string name="long_press_to_reset">Mantenga presionado para restablecer</string>
+    <string name="one_second">segundo</string>
+    <string name="resets_from_zero">Reinicia desde 00:00</string>
+    <string name="settings_back_to_default">Todos los ajustes por defecto</string>
+    <string name="starts_and_restarts_from">Comienza y Reinicia desde 00:0</string>
+    <string name="starts_from_many">Comienza desde %d segundos</string>
+    <string name="tutorial_1_first_press_circle_title">Tutorial único de una sola vez</string>
+    <string name="tutorial_1_first_press_circle">Toque los círculos para continuar</string>
+    <string name="tutorial_2_minsetting_title">Cambie el mapa</string>
+    <string name="tutorial_2_minsetting">Configure el temporizador para contar desde 1, 2 o 3 minutos. Se puede cambiar mientras el temporizador está funcionando.</string>
+    <string name="tutorial_5_swipe_title">Sincroniza el temporizador DURANTE el juego</string>
+    <string name="tutorial_5_swipe">Cuando el temporizador está funcionando, deslice hacia la izquierda para restar un segundo o deslice hacia la derecha para agregar uno.</string>
+    <string name="tutorial_4_start_title">Inicia o reinicia el temporizador</string>
+    <string name="tutorial_6_switch_title">Cambiar temporizadores</string>
+    <string name="tutorial_6_switch">Deslice hacia arriba o hacia abajo para mostrar la cuenta regresiva en la parte superior o inferior.</string>
+    <string name="tutorial_7_close_title">Eso es todo</string>
+    <string name="tutorial_7_close">Para obtener más información, consulte \'halonades.com/timer\'</string>
+    <string name="tutorial_3_add">Agregue unos segundos antes de iniciar el temporizador para sincronizarlo con el juego.</string>
+    <string name="tutorial_3_add_title">Sincronice la hora antes de comenzar</string>
+</resources>

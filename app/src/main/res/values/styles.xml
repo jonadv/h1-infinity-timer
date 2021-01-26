@@ -1,0 +1,13 @@
+
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/Black</item>
+        <item name="colorPrimaryDark">@color/Black</item>
+        <item name="colorAccent">@color/GreyDark</item>
+        <item name="android:windowFullscreen">true</item>
+<!--        <item name="android:navigationBarColor">@color/colorBlack</item>-->
+    </style>
+</resources>
+
+
+

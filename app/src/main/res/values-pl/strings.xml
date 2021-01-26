@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="countdown_on_bottom">Odliczanie na dole</string>
+    <string name="countdown_on_top">Odliczanie na górze</string>
+    <string name="counting_down_from_one_minute">"Odliczanie 1 d minuty "</string>
+    <string name="counting_down_from_two_minutes">Odliczanie 2 d minut</string>
+    <string name="counting_down_from_few_minutes">Odliczanie od% d minut</string>
+    <string name="counting_down_from_other_minutes">Odliczanie od% d minut</string>
+    <string name="exit_press_again">Naciśnij ponownie, aby zamknąć</string>
+    <string name="long_press_to_reset">Naciśnij długo, aby zresetować</string>
+    <string name="one_second">sekunda</string>
+    <string name="resets_from_zero">Odśwież od 00:00</string>
+    <string name="settings_back_to_default">Zresetuj wszystkie ustawienia</string>
+    <string name="starts_and_restarts_from">Uruchamom i odśwież od 00:0</string>
+    <string name="starts_from_many">Uruchom od %d sekund</string>
+    <string name="tutorial_1_first_press_circle_title">Samouczek jednorazowy</string>
+    <string name="tutorial_1_first_press_circle">Dotknij kropki, aby kontynuować</string>
+    <string name="tutorial_2_minsetting_title">Zmień mapę</string>
+    <string name="tutorial_2_minsetting">Ustaw licznik czasu na odliczanie od 1, 2 lub 3 minut. Można zmienić podczas działania stopera.</string>
+    <string name="tutorial_3_add_title">Zsynchronizuj minutnik przed uruchomieniem</string>
+    <string name="tutorial_3_add">Dodaj kilka sekund przed uruchomieniem stopera, aby zsynchronizować go z grą</string>
+    <string name="tutorial_4_start_title">Uruchom lub uruchom ponownie stoper</string>
+    <string name="tutorial_5_swipe_title">Zsynchronizuj minutnik PODCZAS gry</string>
+    <string name="tutorial_5_swipe">Gdy stoper jest uruchomiony, przeciągnij w lewo, aby odjąć sekundę, lub w prawo, aby dodać sekundę</string>
+    <string name="tutorial_6_switch_title">Przełączniki czasowe</string>
+    <string name="tutorial_6_switch">Przesuń w górę lub w dół, aby wyświetlić odliczanie na górze lub na dole</string>
+    <string name="tutorial_7_close_title">To by było na tyle</string>
+    <string name="tutorial_7_close">Aby uzyskać więcej informacji, zobacz \'halonades.com/timer\'</string>
+</resources>
