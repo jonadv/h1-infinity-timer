@@ -596,6 +596,7 @@ class MainActivity : AppCompatActivity (){
             val addS: String = if(iTime > 1) "s" else ""
             val spaceBefore: String = if(!isFirst && strWayToWrite == "long") " " else ""
             return when(timeType){
+                //ToDO vertalen strTimes small TimeText
                 "y" -> spaceBefore+"$iTime" +"year" + addS + addSemiCol + spaceAfter
                 "m" -> spaceBefore+"$iTime" +"month" + addS + addSemiCol + spaceAfter
                 "d" -> spaceBefore+"$iTime" +"day" + addS + addSemiCol + spaceAfter
@@ -608,11 +609,13 @@ class MainActivity : AppCompatActivity (){
         val strMonths: String = strTime(months, "m", strWayToWrite, strTimeHas)
         val strDays: String = strTime(days, "d", strWayToWrite, strTimeHas)
         val strHours: String = strTime(hours, "h", strWayToWrite, strTimeHas)
+
         strMinutes = if(strTotalOrDown == "total" && minutes < 10 ) "0$minutes" else "$minutes"
         strSeconds = if(seconds < 10) "0$seconds" else "$seconds"
 
         return "$strYears$strMonths$strDays$strHours$strMinutes:$strSeconds"
     }
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun runTutorial() {
         resetSettings() // tutorial start
         updateTimeAndUI() //tutorial start
