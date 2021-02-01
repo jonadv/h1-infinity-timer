@@ -30,18 +30,25 @@
     <string name="_00_00" translatable="false">00:00</string>
     <string name="_2_00" translatable="false">2:00</string>
     <string name="timer_reached_infinity" translatable="false">Not in a billion years! Infinity reached. Congrats, or something..</string>
+
+    <string name="volume_off">No sound! Media volume is set to</string>
+    <string name="volume_low">Media volume might be too low, set to</string>
+    <string name="volume_ok">Media volume set to</string>
+
     <string name="error_saving_preferences" translatable="false">Error saving starttime and preferences</string>
     <string name="error_getting_preferences" translatable="false">Error setting saved starttime and preferences</string>
     <string name="error_audio_creating" translatable="false">Something went with the setting audio cues. Restart app, time won\'t be lost.</string>
     <string name="error_audio_releasing" translatable="false">Something went wrong releasing the media.</string>
     <string name="error_audio_playing_sound" translatable="false">Could not play audio cue(s) even though it released and recreated them. Restart app?</string>
-    <string name="error_timer_start" translatable="false">Error starting timer. Restart app, it will remember how to count again.</string>
+    <string name="error_timer_start" translatable="false">Error starting timer. Cancel and restart it?..</string>
     <string name="error_timer_stop" translatable="false">Error stopping timer. Restart app if time does not tick after start.</string>
     <string name="error_timer_ticking" translatable="false">Error updating UI or playing sounds on tick.</string>
     <string name="error_updating_times" translatable="false">Error updating times.</string>
     <string name="error_showing_buttons" translatable="false">Error changing visibility of buttons</string>
     <string name="error_toast" translatable="false">Error showing toasts, like this one.. Restart app?</string>
     <string name="error_tutor_tutorial" translatable="false">Error running tutorial. Figure it out yourself. :)</string>
+    <string name="error_volume_check" translatable="false">Error checking volume</string>
+
     <string name="tutorial_1_first_press_circle_title">One time tutorial</string>
     <string name="tutorial_1_first_press_circle">Tap the circles to continue</string>
     <string name="tutorial_2_minsetting_title">Change map</string>
@@ -55,4 +62,5 @@
     <string name="tutorial_6_switch">Swipe up or down to show the countdown on top or bottom.</string>
     <string name="tutorial_7_close_title">That\'s it</string>
     <string name="tutorial_7_close">For more info see \'halonades.com/timer\'</string>
+
 </resources>

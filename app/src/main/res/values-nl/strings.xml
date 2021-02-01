@@ -26,4 +26,7 @@
     <string name="tutorial_6_switch">Veeg omhoog of omlaag om de afteller bovenaan of onderaan weer te geven</string>
     <string name="tutorial_7_close_title">Dat was het</string>
     <string name="tutorial_7_close">Voor meer info zie \'halonades.com/timer\'</string>
+    <string name="volume_off">Geen geluid! Media volume staat op</string>
+    <string name="volume_low">Media volume misschien te zacht, staat op</string>
+    <string name="volume_ok">Media volume op</string>
 </resources>

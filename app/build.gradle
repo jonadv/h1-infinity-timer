@@ -14,7 +14,7 @@ android {
         //https://gs.statcounter.com/android-version-market-share/mobile-tablet/worldwide
         targetSdkVersion 29 //Android10
         versionCode 2
-        versionName "2.00"
+        versionName "3.00"
     }
     buildTypes {
         release {

@@ -27,4 +27,7 @@
     <string name="tutorial_6_switch_title">Changer le timer</string>
     <string name="tutorial_1_first_press_circle_title">Tutoriel unique</string>
     <string name="tutorial_6_switch">Balayez vers le haut ou vers le bas pour déplacer le compte à rebours</string>
+    <string name="volume_off">Pas de son! Le volume du média est réglé sur</string>
+    <string name="volume_ok">Volume multimédia réglé sur</string>
+    <string name="volume_low">Le volume du média est faible, réglé sur</string>
 </resources>

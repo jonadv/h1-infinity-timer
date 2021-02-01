@@ -29,4 +29,7 @@
     <string name="tutorial_3_add_title">Synchronisieren Sie den Timer vor dem Start</string>
     <string name="tutorial_4_start_title">Starten oder starten Sie den Timer neu</string>
     <string name="tutorial_7_close_title">Das war es</string>
+    <string name="volume_low">Weiches Medienvolumen, eingestellt auf</string>
+    <string name="volume_ok">Medienvolumen eingestellt auf</string>
+    <string name="volume_off">Kein Medienvolumen, eingestellt auf</string>
 </resources>
