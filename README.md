@@ -4,7 +4,7 @@ Available in Play store
 For info see https://www.halonades.com/timer.html
 
 Link to main code
-https://github.com/jonadv/h1timer/blob/master/app/src/main/java/com/bobindustriesbv/halo1infinitytimer/MainActivity.kt
+https://github.com/jonadv/h1-infinity-timer/blob/master/app/src/main/java/com/bobindustriesbv/halo1infinitytimer/MainActivity.kt
 
 Version 3:
 - changed colors of countertexts for noticable difference
