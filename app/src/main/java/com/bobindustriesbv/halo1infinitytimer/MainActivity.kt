@@ -13,6 +13,7 @@ import android.os.Handler
 import android.text.TextUtils.concat
 import android.view.Gravity
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
@@ -27,7 +28,7 @@ import kotlin.math.roundToLong
 
 class MainActivity : AppCompatActivity (){
     private companion object {
-        var boDbg = true
+        var boDbg = false
         var boDbgTxt = false
         const val iDbg_AddedAtStart_Seconds: Long = 0//45
         const val iDbg_AddedAtStart_Minutes: Long = 0//13
@@ -82,7 +83,7 @@ class MainActivity : AppCompatActivity (){
 
         //volume check
         const val iVolumeWarningOff = 1
-        const val iVolumeWarningLow = 35 //  6/15 = 0.40 TODO Grenswaarde iVolumeWarningLow 'zelflerend' maken? Gemiddelde tijdens runtijd timer minus std correctie
+        const val iVolumeWarningLow = 35 //  6/15 = 0.40
 /*        var iVolumeWarningCounterLow = 0L
         var iVolumeWarningCounterOK = 0L
         const val iVolumeWarningCounterLowMAX = 5
@@ -122,31 +123,25 @@ class MainActivity : AppCompatActivity (){
             boVolumeCheckOnCreateDone = true
         }
 
-        btnMinuteSetting.setOnClickListener{
+        findViewById<Button>(R.id.btnMinuteSetting).setOnClickListener{
             adjustTimeSetting()
             updateTimeAndUI() //btnMinuteSetting
             when(secsToCountdownFrom) {
-                60L -> showTheToast(
-                    resources.getQuantityString(
+                60L -> showTheToast(resources.getQuantityString(
                         R.plurals.counting_down_from_minute,
                         1,
                         1
-                    ) + ":\n" + getString(R.string.maps_minute_one)
-                )
-                120L -> showTheToast(
-                    resources.getQuantityString(
+                    ) + ":\n" + getString(R.string.maps_minute_one))
+                120L -> showTheToast(resources.getQuantityString(
                         R.plurals.counting_down_from_minute,
                         2,
                         2
-                    ) + ":\n" + getString(R.string.maps_minute_two)
-                )
-                180L -> showTheToast(
-                    resources.getQuantityString(
+                    ) + ":\n" + getString(R.string.maps_minute_two))
+                180L -> showTheToast(resources.getQuantityString(
                         R.plurals.counting_down_from_minute,
                         3,
                         3
-                    ) + ":\n" + getString(R.string.maps_minute_three)
-                )
+                    ) + ":\n" + getString(R.string.maps_minute_three))
             }
             saveUserPrefs()
         }
@@ -183,26 +178,16 @@ class MainActivity : AppCompatActivity (){
             saveUserPrefs()
         }
         btnTopOverlay.setOnTouchListener(object : OnSwipeTouchListener(this) {
-            override fun onSwipeTop() {
-                switchBigSmallTimerTexts()
-            }
-
-            override fun onSwipeBottom() {
-                switchBigSmallTimerTexts()
-            }
-
-            override fun onSwipeLeft() {
-                smallTimeAdjustment(-1L, true)
-            } //SwipeLeft
-
-            override fun onSwipeRight() {
-                smallTimeAdjustment(1L, true)
-            } //SwipeRight
+            override fun onSwipeTop() {switchBigSmallTimerTexts()}
+            override fun onSwipeBottom() {switchBigSmallTimerTexts()}
+            override fun onSwipeLeft()  {smallTimeAdjustment(-1L, true)} //SwipeLeft
+            override fun onSwipeRight() {smallTimeAdjustment(1L, true)} //SwipeRight
         })
         btnMidOverlay_dbg.setOnClickListener{
             //only if boDbg is true
-            //showTheToast("err")
+            showTheToast("dbg")
             checkVolume() //dbg
+           //startActivity(android.content.Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS))
         }
     }
     override fun onBackPressed() {
@@ -463,7 +448,7 @@ class MainActivity : AppCompatActivity (){
                     .setMaxStreams(6)
                     .setAudioAttributes(audioAttributes)
                     .build()
-            }else {
+            }else { // < API21
                 @Suppress("DEPRECATION")
                 SoundPool(6, AudioManager.STREAM_MUSIC, 0)
             }
@@ -531,6 +516,7 @@ class MainActivity : AppCompatActivity (){
                     showTheToast(getString(R.string.volume_off) + " $volPerc%")
                 }
                 volPerc < iVolumeWarningLow -> {
+                //  turned off for consistent user experience
                 //    if(iVolumeWarningCounterLow < iVolumeWarningCounterMax) {
                         showTheToast(getString(R.string.volume_low) + " $volPerc%")
                 //        iVolumeWarningCounterLow += 1
@@ -764,112 +750,38 @@ class MainActivity : AppCompatActivity (){
             TapTargetSequence(this)
                 .targets(
                     //0 one time tutorial, press circles
-                    TapTarget.forView(
-                        btnTopOverlay,
-                        getString(R.string.tutorial_1_first_press_circle_title),
-                        getString(
-                            R.string.tutorial_1_first_press_circle
-                        )
-                    )
-                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey)
-                        .textColor(
-                            R.color.WhiteGrey
-                        ).textTypeface(Typeface.DEFAULT_BOLD)
-                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true)
-                        .transparentTarget(
-                            false
-                        ).cancelable(false)
+                    TapTarget.forView(btnTopOverlay,getString(R.string.tutorial_1_first_press_circle_title), getString(R.string.tutorial_1_first_press_circle))
+                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
+                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(false).cancelable(false)
                         .targetRadius(80),
                     //1 minute setting 1, 2, 3
-                    TapTarget.forView(
-                        btnMinuteSetting,
-                        getString(R.string.tutorial_2_minsetting_title),
-                        getString(
-                            R.string.tutorial_2_minsetting
-                        )
-                    )
-                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey)
-                        .textColor(
-                            R.color.WhiteGrey
-                        ).textTypeface(Typeface.DEFAULT_BOLD)
-                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true)
-                        .transparentTarget(
-                            true
-                        ).cancelable(false),
+                    TapTarget.forView(btnMinuteSetting,getString(R.string.tutorial_2_minsetting_title),getString(R.string.tutorial_2_minsetting))
+                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
+                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false),
                     //2 add
-                    TapTarget.forView(
-                        btnAdd,
-                        getString(R.string.tutorial_3_add_title),
-                        getString(R.string.tutorial_3_add)
-                    )
-                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey)
-                        .textColor(
-                            R.color.WhiteGrey
-                        ).textTypeface(Typeface.DEFAULT_BOLD)
-                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true)
-                        .transparentTarget(
-                            true
-                        ).cancelable(false),
+                    TapTarget.forView(btnAdd,getString(R.string.tutorial_3_add_title),getString(R.string.tutorial_3_add))
+                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
+                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false),
                     //3 start
-                    TapTarget.forView(
-                        btnStartInfinity,
-                        getString(R.string.tutorial_4_start_title),
-                        ""
-                    )
-                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey)
-                        .textColor(
-                            R.color.WhiteGrey
-                        ).textTypeface(Typeface.DEFAULT_BOLD)
-                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true)
-                        .transparentTarget(
-                            true
-                        ).cancelable(false)
+                    TapTarget.forView(btnStartInfinity,getString(R.string.tutorial_4_start_title), "")
+                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
+                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false)
                         .targetRadius(100),
                     //4 swipe add/subtract
-                    TapTarget.forView(
-                        btnTopOverlay, getString(R.string.tutorial_5_swipe_title), getString(
-                            R.string.tutorial_5_swipe
-                        )
-                    )
-                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey)
-                        .textColor(
-                            R.color.WhiteGrey
-                        ).textTypeface(Typeface.DEFAULT_BOLD)
-                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true)
-                        .transparentTarget(
-                            true
-                        ).cancelable(false)
+                    TapTarget.forView(btnTopOverlay,getString(R.string.tutorial_5_swipe_title),getString(R.string.tutorial_5_swipe))
+                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
+                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false)
                         .icon(introIconHor, false).targetRadius(170),
                     //5 swipe up/down
-                    TapTarget.forView(
-                        btnTopOverlay, getString(R.string.tutorial_6_switch_title), getString(
-                            R.string.tutorial_6_switch
-                        )
-                    )
-                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey)
-                        .textColor(
-                            R.color.WhiteGrey
-                        ).textTypeface(Typeface.DEFAULT_BOLD)
-                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true)
-                        .transparentTarget(
-                            true
-                        ).cancelable(false)
+                    TapTarget.forView(btnTopOverlay, getString(R.string.tutorial_6_switch_title),getString(R.string.tutorial_6_switch))
+                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
+                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false)
                         .icon(introIconVert, false).targetRadius(170),
                     //6 close
-                    TapTarget.forView(
-                        btnTopOverlay, getString(R.string.tutorial_7_close_title), getString(
-                            R.string.tutorial_7_close
-                        )
-                    )
-                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey)
-                        .textColor(
-                            R.color.WhiteGrey
-                        ).textTypeface(Typeface.DEFAULT_BOLD)
-                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true)
-                        .transparentTarget(
-                            false
-                        ).cancelable(false)
-                        .targetRadius(80)
+                    TapTarget.forView(btnTopOverlay,getString(R.string.tutorial_7_close_title),getString(R.string.tutorial_7_close))
+                        .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
+                        .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(false).cancelable(false)
+                        .targetRadius( 80)
                 )
                 .listener(object : TapTargetSequence.Listener {
                     override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {
