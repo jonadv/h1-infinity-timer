@@ -127,21 +127,9 @@ class MainActivity : AppCompatActivity (){
             adjustTimeSetting()
             updateTimeAndUI() //btnMinuteSetting
             when(secsToCountdownFrom) {
-                60L -> showTheToast(resources.getQuantityString(
-                        R.plurals.counting_down_from_minute,
-                        1,
-                        1
-                    ) + ":\n" + getString(R.string.maps_minute_one))
-                120L -> showTheToast(resources.getQuantityString(
-                        R.plurals.counting_down_from_minute,
-                        2,
-                        2
-                    ) + ":\n" + getString(R.string.maps_minute_two))
-                180L -> showTheToast(resources.getQuantityString(
-                        R.plurals.counting_down_from_minute,
-                        3,
-                        3
-                    ) + ":\n" + getString(R.string.maps_minute_three))
+                60L -> showTheToast(resources.getQuantityString(R.plurals.counting_down_from_minute,1,1) + ":\n" + getString(R.string.maps_minute_one))
+                120L -> showTheToast(resources.getQuantityString(R.plurals.counting_down_from_minute,2,2) + ":\n" + getString(R.string.maps_minute_two))
+                180L -> showTheToast(resources.getQuantityString(R.plurals.counting_down_from_minute,3,3) + ":\n" + getString(R.string.maps_minute_three))
             }
             saveUserPrefs()
         }
