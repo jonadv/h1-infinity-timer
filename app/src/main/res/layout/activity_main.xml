@@ -61,7 +61,7 @@
         app:layout_constraintGuide_percent="@dimen/glVert_2" />
 
     <ImageView
-        android:id="@+id/imgBackground_timer"
+        android:id="@+id/imgBackgroundTimer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="invisible"
@@ -74,7 +74,7 @@
         tools:ignore="ContentDescription" />
 
     <ImageView
-        android:id="@+id/imgBackground_timer_off"
+        android:id="@+id/imgBackgroundTimerOff"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="visible"
@@ -179,7 +179,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/btnMidOverlay_dbg"
+        android:id="@+id/btnMidOverlayDbg"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="0dp"

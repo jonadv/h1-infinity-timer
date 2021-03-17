@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
@@ -11,20 +10,20 @@ android {
         minSdkVersion 14 //Minimum for androidx and taptargetview is 14. Tested on Samsung s2 with sdk 16. Minimum sdk Toneplayer on github said 15.
         //https://gs.statcounter.com/android-version-market-share/mobile-tablet/worldwide
         //noinspection OldTargetApi
-        targetSdkVersion 29 //29=Android10 30=Android11
+        targetSdkVersion 29   //29=Android10 30=Android11
         versionCode 3
         versionName "3.00"
     }
     buildTypes {
         release {
             minifyEnabled true
+/*            shrinkResources true*/ //TODO: waarom deze er niet bijgezet bij versie 2.00? https://developer.android.com/studio/build/shrink-code
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-//    nodig? https://developer.android.com/topic/libraries/view-binding/migration
-//    buildFeatures {
-//        viewBinding true
-//    }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {

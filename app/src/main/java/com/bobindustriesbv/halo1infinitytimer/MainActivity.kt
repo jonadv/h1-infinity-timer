@@ -13,13 +13,13 @@ import android.os.Handler
 import android.text.TextUtils.concat
 import android.view.Gravity
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
+import com.bobindustriesbv.halo1infinitytimer.databinding.ActivityMainBinding
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
-import kotlinx.android.synthetic.main.activity_main.*
 import net.mabboud.OneTimeBuzzer
 import java.sql.Timestamp
 import kotlin.Long.Companion.MAX_VALUE
@@ -27,8 +27,8 @@ import kotlin.math.max
 import kotlin.math.roundToLong
 
 class MainActivity : AppCompatActivity (){
-    private companion object {
-        var boDbg = false
+    companion object {
+        var boDbg = true
         var boDbgTxt = false
         const val iDbg_AddedAtStart_Seconds: Long = 0//45
         const val iDbg_AddedAtStart_Minutes: Long = 0//13
@@ -97,6 +97,106 @@ class MainActivity : AppCompatActivity (){
     private lateinit var soundPool: SoundPool
     private lateinit var mpRandExitSound: MediaPlayer
 
+    private var theTimer: PreciseCountdown = object : PreciseCountdown(MAX_VALUE, millisOneSecond) {
+        override fun onTick(timeLeft: Long) {
+            try{
+                if (boFirstActivation){
+                    updateTimes() //theTimer
+                    this@MainActivity.runOnUiThread { updateTimeTexts() }
+                    this@MainActivity.runOnUiThread { playMinuteSounds() }
+                }
+                boFirstActivation = true
+            }catch (e: Exception){
+                showTheToast(getString(R.string.error_timer_ticking), true)
+            }
+        }
+        override fun onFinished() {
+            onTick(0) // when the timer finishes onTick isn't called
+            showTheToast(getString(R.string.timer_reached_infinity), true)
+        }
+    }
+
+    private lateinit var bd : ActivityMainBinding //Jetpack view binding
+    @SuppressLint("ClickableViewAccessibility") //tbv btnTopOverlay
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        bd = ActivityMainBinding.inflate(layoutInflater)
+        this.setContentView(bd.root)
+
+        getUserPrefs()
+        updateTimeAndUI(true) //onCreate
+        if(!boTutorialFinished) runTutorial()
+        if(!boVolumeCheckOnCreateDone) {
+            Handler().postDelayed({
+                checkVolume(true) //onCreate
+            },  1000)
+            boVolumeCheckOnCreateDone = true
+        }
+
+        bd.btnMinuteSetting.setOnClickListener{
+            adjustTimeSetting()
+            updateTimeAndUI() //btnMinuteSetting
+            when(secsToCountdownFrom) {
+                60L -> showTheToast(resources.getQuantityString(R.plurals.counting_down_from_minute,1,1) + ":\n" + getString(R.string.maps_minute_one))
+                120L -> showTheToast(resources.getQuantityString(R.plurals.counting_down_from_minute,2,2) + ":\n" + getString(R.string.maps_minute_two))
+                180L -> showTheToast(resources.getQuantityString(R.plurals.counting_down_from_minute,3,3) + ":\n" + getString(R.string.maps_minute_three))
+            }
+            saveUserPrefs()
+        }
+        bd.btnStartInfinity.setOnClickListener {
+            checkVolume() //btnStart
+            startOrRestartTheTimer()  //start
+            playMinuteSounds()
+            updateTimeAndUI() //btnStart (only ActionButtons?)
+            saveUserPrefs()
+        }
+        bd.btnRestart.setOnClickListener {
+            if(!boTimerRunning){
+                startOrRestartTheTimer() //restart from stop - never happens/for safety when returning from onPause/other activity
+            }else{
+                stopTheTimer() //before restart
+                startOrRestartTheTimer() //restart from running
+            }
+            updateTimeAndUI() //btnRestart
+            saveUserPrefs()
+        }
+        bd.btnAdd.setOnClickListener {
+            smallTimeAdjustment(1L) //btnAdd
+        }
+        bd.btnAdd.setOnLongClickListener{
+            resetSettings() //btnAdd long
+            updateTimeAndUI() //btnAdd long
+            showTheToast(getString(R.string.settings_back_to_default))
+            saveUserPrefs()
+            return@setOnLongClickListener true
+        }
+        bd.btnClear.setOnClickListener {
+            stopTheTimer() //btnClear
+            updateTimeAndUI() //btnClear
+            saveUserPrefs()
+        }
+        bd.btnTopOverlay.setOnTouchListener(object : OnSwipeTouchListener(this) {
+            override fun onSwipeTop() {switchBigSmallTimerTexts()}
+            override fun onSwipeBottom() {switchBigSmallTimerTexts()}
+            override fun onSwipeLeft()  {smallTimeAdjustment(-1L, true)} //SwipeLeft
+            override fun onSwipeRight() {smallTimeAdjustment(1L, true)} //SwipeRight
+        })
+        bd.btnMidOverlayDbg.setOnClickListener {
+            //only if boDbg is true
+/*            showTheToast("dbg")
+            checkVolume() //dbg*/
+
+            showTheToast("dbg: ")
+           //startActivity(android.content.Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS))
+
+
+/*            val am = getSystemService(AUDIO_SERVICE) as AudioManager
+            when(am.isMusicActive){
+                true -> showTheToast("test music is active: TRUE")
+                else -> showTheToast( "test music is active: FALSE")}
+ */
+        }
+    }
     override fun onResume() {
         super.onResume()
         createMedia()
@@ -109,79 +209,9 @@ class MainActivity : AppCompatActivity (){
         releaseMedia()
         stopTheTimerItself() //onPause
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        this.setContentView(R.layout.activity_main)
-
-        getUserPrefs()
-        updateTimeAndUI(true) //onCreate
-        if(!boTutorialFinished) runTutorial()
-        if(!boVolumeCheckOnCreateDone) {
-            Handler().postDelayed({
-                checkVolume(true) //onCreate
-            },  1000)
-            boVolumeCheckOnCreateDone = true
-        }
-
-        findViewById<Button>(R.id.btnMinuteSetting).setOnClickListener{
-            adjustTimeSetting()
-            updateTimeAndUI() //btnMinuteSetting
-            when(secsToCountdownFrom) {
-                60L -> showTheToast(resources.getQuantityString(R.plurals.counting_down_from_minute,1,1) + ":\n" + getString(R.string.maps_minute_one))
-                120L -> showTheToast(resources.getQuantityString(R.plurals.counting_down_from_minute,2,2) + ":\n" + getString(R.string.maps_minute_two))
-                180L -> showTheToast(resources.getQuantityString(R.plurals.counting_down_from_minute,3,3) + ":\n" + getString(R.string.maps_minute_three))
-            }
-            saveUserPrefs()
-        }
-        btnStartInfinity.setOnClickListener {
-            checkVolume() //btnStart
-            startOrRestartTheTimer()  //start
-            playMinuteSounds()
-            updateTimeAndUI() //btnStart (only ActionButtons?)
-            saveUserPrefs()
-        }
-        btnRestart.setOnClickListener{
-            if(!boTimerRunning){
-                startOrRestartTheTimer() //restart from stop - never happens/for safety when returning from onPause/other activity
-            }else{
-                stopTheTimer() //before restart
-                startOrRestartTheTimer() //restart from running
-            }
-            updateTimeAndUI() //btnRestart
-            saveUserPrefs()
-        }
-        btnAdd.setOnClickListener {
-            smallTimeAdjustment(1L) //btnAdd
-        }
-        btnAdd.setOnLongClickListener{
-            resetSettings() //btnAdd long
-            updateTimeAndUI() //btnAdd long
-            showTheToast(getString(R.string.settings_back_to_default))
-            saveUserPrefs()
-            return@setOnLongClickListener true
-        }
-        btnClear.setOnClickListener {
-            stopTheTimer() //btnClear
-            updateTimeAndUI() //btnClear
-            saveUserPrefs()
-        }
-        btnTopOverlay.setOnTouchListener(object : OnSwipeTouchListener(this) {
-            override fun onSwipeTop() {switchBigSmallTimerTexts()}
-            override fun onSwipeBottom() {switchBigSmallTimerTexts()}
-            override fun onSwipeLeft()  {smallTimeAdjustment(-1L, true)} //SwipeLeft
-            override fun onSwipeRight() {smallTimeAdjustment(1L, true)} //SwipeRight
-        })
-        btnMidOverlay_dbg.setOnClickListener{
-            //only if boDbg is true
-            showTheToast("dbg")
-            checkVolume() //dbg
-           //startActivity(android.content.Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS))
-        }
-    }
     override fun onBackPressed() {
         try{
-            if (boBackbuttonPressedOnceRecently) {
-                super.onBackPressed()
+            if (boBackbuttonPressedOnceRecently) {super.onBackPressed()
                 return
             }
             showTheToast(getString(R.string.exit_press_again))
@@ -219,7 +249,7 @@ class MainActivity : AppCompatActivity (){
                     showTheToast(getString(R.string._00_00))
                 }
             }
-        }else{ //!boTimerRunning -> btnAdd or SwipeRight
+        }else{ //!boTimerRunning -> bd.btnAdd or SwipeRight
             secsAddedToCountdownStart = if(secAdjustment > 0){ //btnAdd or SwipeRight
                 when (secsAddedToCountdownStart){
                     in 0 until secsMaxAddedToCount_Reset -> secsAddedToCountdownStart + 1
@@ -236,19 +266,15 @@ class MainActivity : AppCompatActivity (){
             }
             showTheToast(
                 when (secsAddedToCountdownStart) {
-                    0L -> getString(R.string.starts_and_restarts_from) + "$secsAddedToCountdownStart"
+                    0L                              -> getString(R.string.starts_and_restarts_from) + "$secsAddedToCountdownStart"
                     in 1..secsMaxAddedToCount_Reset -> getString(R.string.starts_and_restarts_from) + "$secsAddedToCountdownStart" +
                             if (!boSwipe) {
                                 "\n" + getString(R.string.long_press_to_reset)
                             } else {
                                 ""
                             }
-                    else -> resources.getQuantityString(
-                        R.plurals.starts_from_many,
-                        secsAddedToCountdownStart.toInt(),
-                        secsAddedToCountdownStart.toInt()
-                    ) +
-                            "\n" + getString(R.string.resets_from_zero) +
+                    else                            -> resources.getQuantityString(R.plurals.starts_from_many, secsAddedToCountdownStart.toInt(), secsAddedToCountdownStart.toInt()
+                    ) + "\n" + getString(R.string.resets_from_zero) +
                             if (!boSwipe) {
                                 "\n" + getString(R.string.long_press_to_reset)
                             } else {
@@ -261,30 +287,9 @@ class MainActivity : AppCompatActivity (){
         if(boTimerRunning) playMinuteSounds(true)
         saveUserPrefs()
     }
-    private var theTimer: PreciseCountdown = object : PreciseCountdown(MAX_VALUE, millisOneSecond) {
-        override fun onTick(timeLeft: Long) {
-            try{
-                if (boFirstActivation){
-                    updateTimes() //theTimer
-                    this@MainActivity.runOnUiThread { updateTimeTexts() }
-                    this@MainActivity.runOnUiThread { playMinuteSounds() }
-                }
-                boFirstActivation = true
-            }catch (e: Exception){
-                showTheToast(getString(R.string.error_timer_ticking), true)
-            }
-        }
-        override fun onFinished() {
-            onTick(0) // when the timer finishes onTick isn't called
-            showTheToast(getString(R.string.timer_reached_infinity), true)
-        }
-    }
     private fun saveUserPrefs() {
         try {
-            val sharedPref: SharedPreferences = this.getSharedPreferences(
-                sharedPrefFile,
-                Context.MODE_PRIVATE
-            )
+            val sharedPref: SharedPreferences = this.getSharedPreferences(sharedPrefFile,Context.MODE_PRIVATE)
             val editor: SharedPreferences.Editor = sharedPref.edit()
             editor.putBoolean("boSettingsAvailable", true)
             editor.putBoolean("boTutorialFinished", boTutorialFinished)
@@ -302,28 +307,16 @@ class MainActivity : AppCompatActivity (){
     }
     private fun getUserPrefs(){
         try{
-            val sharedPref: SharedPreferences = this.getSharedPreferences(
-                sharedPrefFile,
-                Context.MODE_PRIVATE
-            )
+            val sharedPref: SharedPreferences = this.getSharedPreferences(sharedPrefFile,Context.MODE_PRIVATE)
             boSettingsAvailable = sharedPref.getBoolean("boSettingsAvailable", boSettingsAvailable)
             boTutorialFinished =  sharedPref.getBoolean("boTutorialFinished", boTutorialFinished)
             if(boSettingsAvailable){
                 boFirstActivation = sharedPref.getBoolean("boFirstActivation", boFirstActivation)
                 boTimerRunning = sharedPref.getBoolean("boTimeRunning", boTimerRunning)
-                boBigTimeIsTotalTime = sharedPref.getBoolean(
-                    "boBigTimeIsTotalTime",
-                    boBigTimeIsTotalTime
-                )
-                millisTimeStamp_StartToInfinity = sharedPref.getLong(
-                    "millisTimeStamp_StartToInfinity",
-                    millisTimeStamp_StartToInfinity
-                )
+                boBigTimeIsTotalTime = sharedPref.getBoolean("boBigTimeIsTotalTime",boBigTimeIsTotalTime)
+                millisTimeStamp_StartToInfinity = sharedPref.getLong("millisTimeStamp_StartToInfinity",millisTimeStamp_StartToInfinity)
                 secsToCountdownFrom = sharedPref.getLong("secsToCountdownFrom", secsToCountdownFrom)
-                secsAddedToCountdownStart = sharedPref.getLong(
-                    "secsAddedToCountdownStart",
-                    secsAddedToCountdownStart
-                )
+                secsAddedToCountdownStart = sharedPref.getLong("secsAddedToCountdownStart",secsAddedToCountdownStart)
             }
         }catch (e: Exception){
             showTheToast(getString(R.string.error_getting_preferences))
@@ -581,28 +574,28 @@ class MainActivity : AppCompatActivity (){
     }
     private fun updateActionButtons(){
         try{
-            imgBackground_timer.visibility = if(boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
-            imgBackground_timer_off.visibility  =  if(!boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
-            imgInfinity.visibility  =  if(!boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
-            btnStartInfinity.visibility  =  if(!boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
-            imgRestart.visibility  = if(boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
-            btnRestart.visibility = if(boTimerRunning){
+            bd.imgBackgroundTimer.visibility = if(boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
+            bd.imgBackgroundTimerOff.visibility  =  if(!boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
+            bd.imgInfinity.visibility  =  if(!boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
+            bd.btnStartInfinity.visibility  =  if(!boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
+            bd.imgRestart.visibility  = if(boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
+            bd.btnRestart.visibility = if(boTimerRunning){
                 when (secsAddedToCountdownStart){
-                    1L -> imgRestart.setImageResource(R.drawable.ic_restart_from_1)
-                    2L -> imgRestart.setImageResource(R.drawable.ic_restart_from_2)
-                    3L -> imgRestart.setImageResource(R.drawable.ic_restart_from_3)
-                    else -> imgRestart.setImageResource(R.drawable.ic_restart_from_0)
+                    1L -> bd.imgRestart.setImageResource(R.drawable.ic_restart_from_1)
+                    2L -> bd.imgRestart.setImageResource(R.drawable.ic_restart_from_2)
+                    3L -> bd.imgRestart.setImageResource(R.drawable.ic_restart_from_3)
+                    else -> bd.imgRestart.setImageResource(R.drawable.ic_restart_from_0)
                 }
                 View.VISIBLE}else{View.INVISIBLE}
-            imgClear.visibility  = if(boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
-            btnClear.visibility  = if(boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
-            imgAdd.visibility = if(!boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
-            btnAdd.visibility  = if(!boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
-            if (!boDbg) btnMidOverlay_dbg.visibility = View.GONE
+            bd.imgClear.visibility  = if(boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
+            bd.btnClear.visibility  = if(boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
+            bd.imgAdd.visibility = if(!boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
+            bd.btnAdd.visibility  = if(!boTimerRunning){View.VISIBLE}else{View.INVISIBLE}
+            if (!boDbg) bd.btnMidOverlayDbg.visibility = View.GONE
             when(secsToCountdownFrom) {
-                60L -> imgMinuteSetting.setImageResource(R.drawable.ic_nr_i)
-                120L -> imgMinuteSetting.setImageResource(R.drawable.ic_nr_ii)
-                180L -> imgMinuteSetting.setImageResource(R.drawable.ic_nr_iii)
+                60L -> bd.imgMinuteSetting.setImageResource(R.drawable.ic_nr_i)
+                120L -> bd.imgMinuteSetting.setImageResource(R.drawable.ic_nr_ii)
+                180L -> bd.imgMinuteSetting.setImageResource(R.drawable.ic_nr_iii)
             }
         }catch (e: Exception){
             if(boDbg) showTheToast(getString(R.string.error_showing_buttons))
@@ -611,36 +604,36 @@ class MainActivity : AppCompatActivity (){
     private fun updateTextColors(){
         //imgClear, imgRestart en imgInfinity zijn vaste kleur ivm zichtbaarheid
         if (!boTimerRunning) {
-            imgMinuteSetting.setColorFilter(resources.getColor(R.color.WhiteGrey))
+            bd.imgMinuteSetting.setColorFilter(ContextCompat.getColor(this, R.color.WhiteGrey))
             if (boBigTimeIsTotalTime) {
-                edtTimeSmall.setTextColor(resources.getColor(R.color.WhiteGrey))
-                edtTimeBig.setTextColor(resources.getColor(R.color.WhiteGreyLight))
+                bd.edtTimeSmall.setTextColor(ContextCompat.getColor(this, R.color.WhiteGrey))
+                bd.edtTimeBig.setTextColor(ContextCompat.getColor(this, R.color.WhiteGreyLight))
             }else{
-                edtTimeSmall.setTextColor(resources.getColor(R.color.WhiteGreyLight))
-                edtTimeBig.setTextColor(resources.getColor(R.color.WhiteGrey))
+                bd.edtTimeSmall.setTextColor(ContextCompat.getColor(this, R.color.WhiteGreyLight))
+                bd.edtTimeBig.setTextColor(ContextCompat.getColor(this, R.color.WhiteGrey))
             }
         } else {
-            imgMinuteSetting.setColorFilter(resources.getColor(R.color.WhiteGreyDark))
+            bd.imgMinuteSetting.setColorFilter(ContextCompat.getColor(this, R.color.WhiteGreyDark))
             if (boBigTimeIsTotalTime) {
-                edtTimeSmall.setTextColor(resources.getColor(R.color.WhiteGreyDark))
-                edtTimeBig.setTextColor(resources.getColor(R.color.WhiteGreyLight))
+                bd.edtTimeSmall.setTextColor(ContextCompat.getColor(this, R.color.WhiteGreyDark))
+                bd.edtTimeBig.setTextColor(ContextCompat.getColor(this, R.color.WhiteGreyLight))
             }else{
-                edtTimeSmall.setTextColor(resources.getColor(R.color.WhiteGreyLight))
-                edtTimeBig.setTextColor(resources.getColor(R.color.WhiteGreyDark))
+                bd.edtTimeSmall.setTextColor(ContextCompat.getColor(this, R.color.WhiteGreyLight))
+                bd.edtTimeBig.setTextColor(ContextCompat.getColor(this, R.color.WhiteGreyDark))
             }
         }
     }
     private fun updateTimeTexts(){
         if (boBigTimeIsTotalTime) {
-            edtTimeBig.text = longToTimeText(secsSinceStart_total, "top", "total")
-            edtTimeSmall.text = longToTimeText(secsSinceStart_down, "bottom", "down")
+            bd.edtTimeBig.text = longToTimeText(secsSinceStart_total, "top", "total")
+            bd.edtTimeSmall.text = longToTimeText(secsSinceStart_down, "bottom", "down")
         } else {
-            edtTimeBig.text = longToTimeText(secsSinceStart_down, "top", "down")
-            edtTimeSmall.text = longToTimeText(secsSinceStart_total, "bottom", "total")
+            bd.edtTimeBig.text = longToTimeText(secsSinceStart_down, "top", "down")
+            bd.edtTimeSmall.text = longToTimeText(secsSinceStart_total, "bottom", "total")
         }
-        edtTimeBig.maxLines = 1
+        bd.edtTimeBig.maxLines = 1
         if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
-            if(secsSinceStart_total > secsMONTH) edtTimeBig.maxLines = 2 else edtTimeBig.maxLines = 1
+            if(secsSinceStart_total > secsMONTH) bd.edtTimeBig.maxLines = 2 else bd.edtTimeBig.maxLines = 1
         }
     }
     private fun longToTimeText(aTimeInSeconds: Long, strTopOrBottom: String, strTotalOrDown: String): String{
@@ -715,6 +708,7 @@ class MainActivity : AppCompatActivity (){
 
         return "$strYears$strMonths$strDays$strHours$strMinutes:$strSeconds"
     }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun runTutorial() {
         resetSettings() // tutorial start
@@ -738,35 +732,35 @@ class MainActivity : AppCompatActivity (){
             TapTargetSequence(this)
                 .targets(
                     //0 one time tutorial, press circles
-                    TapTarget.forView(btnTopOverlay,getString(R.string.tutorial_1_first_press_circle_title), getString(R.string.tutorial_1_first_press_circle))
+                    TapTarget.forView(bd.btnTopOverlay,getString(R.string.tutorial_1_first_press_circle_title), getString(R.string.tutorial_1_first_press_circle))
                         .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                         .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(false).cancelable(false)
                         .targetRadius(80),
                     //1 minute setting 1, 2, 3
-                    TapTarget.forView(btnMinuteSetting,getString(R.string.tutorial_2_minsetting_title),getString(R.string.tutorial_2_minsetting))
+                    TapTarget.forView(bd.btnMinuteSetting,getString(R.string.tutorial_2_minsetting_title),getString(R.string.tutorial_2_minsetting))
                         .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                         .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false),
                     //2 add
-                    TapTarget.forView(btnAdd,getString(R.string.tutorial_3_add_title),getString(R.string.tutorial_3_add))
+                    TapTarget.forView(bd.btnAdd,getString(R.string.tutorial_3_add_title),getString(R.string.tutorial_3_add))
                         .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                         .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false),
                     //3 start
-                    TapTarget.forView(btnStartInfinity,getString(R.string.tutorial_4_start_title), "")
+                    TapTarget.forView(bd.btnStartInfinity,getString(R.string.tutorial_4_start_title), "")
                         .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                         .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false)
                         .targetRadius(100),
                     //4 swipe add/subtract
-                    TapTarget.forView(btnTopOverlay,getString(R.string.tutorial_5_swipe_title),getString(R.string.tutorial_5_swipe))
+                    TapTarget.forView(bd.btnTopOverlay,getString(R.string.tutorial_5_swipe_title),getString(R.string.tutorial_5_swipe))
                         .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                         .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false)
                         .icon(introIconHor, false).targetRadius(170),
                     //5 swipe up/down
-                    TapTarget.forView(btnTopOverlay, getString(R.string.tutorial_6_switch_title),getString(R.string.tutorial_6_switch))
+                    TapTarget.forView(bd.btnTopOverlay, getString(R.string.tutorial_6_switch_title),getString(R.string.tutorial_6_switch))
                         .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                         .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false)
                         .icon(introIconVert, false).targetRadius(170),
                     //6 close
-                    TapTarget.forView(btnTopOverlay,getString(R.string.tutorial_7_close_title),getString(R.string.tutorial_7_close))
+                    TapTarget.forView(bd.btnTopOverlay,getString(R.string.tutorial_7_close_title),getString(R.string.tutorial_7_close))
                         .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                         .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(false).cancelable(false)
                         .targetRadius( 80)
@@ -774,9 +768,9 @@ class MainActivity : AppCompatActivity (){
                 .listener(object : TapTargetSequence.Listener {
                     override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {
                         when (tutorialStep) {
-                            1 -> btnMinuteSetting.performClick()
-                            2 -> btnAdd.performClick()
-                            3 -> btnStartInfinity.performClick()
+                            1 -> bd.btnMinuteSetting.performClick()
+                            2 -> bd.btnAdd.performClick()
+                            3 -> bd.btnStartInfinity.performClick()
                             4 -> {
                                 boTutorialHideToasts = false
                                 smallTimeAdjustment(1, true) //tutorial
