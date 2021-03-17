@@ -10,7 +10,7 @@ import android.util.Log;
  minimum SDK on github is 15, instead of overwriting implementation just copied used classes
  also because importing would require overriding android:allowBackup in
  AndroidManifest.xml with tools:replace="android:allowBackup" */
-@SuppressWarnings({"EmptyMethod", "WeakerAccess", "ClickableViewAccessibility", "unused", "SillyAssignment", "UnusedAssignment"})
+@SuppressWarnings({"EmptyMethod", "WeakerAccess", "ClickableViewAccessibility", "SillyAssignment", "UnusedAssignment"})
 public abstract class TonePlayer {
     protected double toneFreqInHz = 440;
     protected int volume = 100;

@@ -4,7 +4,6 @@ package net.mabboud;
  * A buzzer that will end after the set duration has ended or stop() is called.
  * Default duration is 5 seconds.
  */
-@SuppressWarnings({ "unused"})
 public class OneTimeBuzzer extends TonePlayer {
     protected double duration = 0.5;
 

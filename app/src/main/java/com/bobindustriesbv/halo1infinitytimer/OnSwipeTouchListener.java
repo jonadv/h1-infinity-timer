@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-@SuppressWarnings({"EmptyMethod", "WeakerAccess", "ClickableViewAccessibility", "unused"})
+@SuppressWarnings({"EmptyMethod", "WeakerAccess", "ClickableViewAccessibility"})
 public class OnSwipeTouchListener implements OnTouchListener {
 
     private final GestureDetector gestureDetector;
