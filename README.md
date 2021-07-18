@@ -3,10 +3,8 @@ Android app code for H1 Infinity timer
 Available in Play store 
 For info see https://www.halonades.com/timer.html
 
-Link to main code
-https://github.com/jonadv/h1-infinity-timer/blob/master/app/src/main/java/com/bobindustriesbv/halo1infinitytimer/MainActivity.kt
 
-Version 3:
+Upcoming version 3:
 - changed colors of counter texts for noticeable difference
 - total time counter is more white
 - darkened colors of other buttons and other timer
