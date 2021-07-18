@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--#aaaaaa kleur grijs in v1 en v2. Voor v3 opgedeeld in twee tbv onderscheid afteller-->
 <resources>
+    <!--    background-->
     <color name="Black">#000000</color>
+
+    <!--    surrounding line for tutorial arrows-->
     <color name="GreyDark">#1a1a1a</color>
+
+<!--    active button-->
     <color name="WhiteGrey">#aaaaaa</color>
-    <!--#aaaaaa kleur grijs in v1 en v2. Voor v3 opgedeeld in twee als timer loopt tbv onderscheid afteller. Afteller iets lichter, rest donkerder-->
+
+    <!--    inactive button-->
     <color name="WhiteGreyDark">#666666</color>
+
     <color name="WhiteGreyLight">#dddddd</color>
     <color name="White">#FFFFFFFF</color>
 </resources>
