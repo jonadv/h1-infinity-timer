@@ -8,8 +8,6 @@ import android.os.Build
 import androidx.appcompat.content.res.AppCompatResources
 import com.bobindustriesbv.halo1infinitytimer.UserInstructor.showTheToast
 import com.bobindustriesbv.halo1infinitytimer.databinding.ActivityMainBinding
-import com.bobindustriesbv.halo1infinitytimer.helpers.App
-import com.bobindustriesbv.halo1infinitytimer.helpers.Strings
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
 
@@ -24,48 +22,48 @@ fun runTutorial(mContext : Context,  bd : ActivityMainBinding) {
         @SuppressLint("SourceLockedOrientationActivity")
         main.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         val introIconHor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            App.res.getDrawable(R.drawable.ic_swap_horiz_lined, main.theme)
+             main.getDrawable(R.drawable.ic_swap_horiz_lined)
         } else {
             AppCompatResources.getDrawable(mContext, R.drawable.ic_swap_horiz_lined)
         }
         val introIconVert = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            App.res.getDrawable(R.drawable.ic_swap_vertic_lined, main.theme )
+            main.getDrawable(R.drawable.ic_swap_vertic_lined)
         } else {
             AppCompatResources.getDrawable(mContext, R.drawable.ic_swap_vertic_lined)
         }
         //https://android-arsenal.com/details/1/4338
-        TapTargetSequence(main)
+        TapTargetSequence(mContext)
             .targets(
                 //0 one time tutorial, press circles
-                TapTarget.forView(bd.btnTopOverlay, Strings.get(R.string.tutorial_1_first_press_circle_title), Strings.get(R.string.tutorial_1_first_press_circle))
+                TapTarget.forView(bd.btnTopOverlay, main.getString(R.string.tutorial_1_first_press_circle_title), main.getString(R.string.tutorial_1_first_press_circle))
                     .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                     .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(false).cancelable(false)
                     .targetRadius(80),
                 //1 minute setting 1, 2, 3
-                TapTarget.forView(bd.btnMinuteSetting, Strings.get(R.string.tutorial_2_minsetting_title), Strings.get(R.string.tutorial_2_minsetting))
+                TapTarget.forView(bd.btnMinuteSetting, main.getString(R.string.tutorial_2_minsetting_title), main.getString(R.string.tutorial_2_minsetting))
                     .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                     .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false),
                 //2 add
-                TapTarget.forView(bd.btnAdd, Strings.get(R.string.tutorial_3_add_title), Strings.get(R.string.tutorial_3_add))
+                TapTarget.forView(bd.btnAdd, main.getString(R.string.tutorial_3_add_title), main.getString(R.string.tutorial_3_add))
                     .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                     .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false),
                 //3 start
-                TapTarget.forView(bd.btnStartInfinity, Strings.get(R.string.tutorial_4_start_title), "")
+                TapTarget.forView(bd.btnStartInfinity, main.getString(R.string.tutorial_4_start_title), "")
                     .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                     .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false)
                     .targetRadius(100),
                 //4 swipe add/subtract
-                TapTarget.forView(bd.btnTopOverlay, Strings.get(R.string.tutorial_5_swipe_title), Strings.get(R.string.tutorial_5_swipe))
+                TapTarget.forView(bd.btnTopOverlay, main.getString(R.string.tutorial_5_swipe_title), main.getString(R.string.tutorial_5_swipe))
                     .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                     .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false)
                     .icon(introIconHor, false).targetRadius(170),
                 //5 swipe up/down
-                TapTarget.forView(bd.btnTopOverlay, Strings.get(R.string.tutorial_6_switch_title), Strings.get(R.string.tutorial_6_switch))
+                TapTarget.forView(bd.btnTopOverlay, main.getString(R.string.tutorial_6_switch_title), main.getString(R.string.tutorial_6_switch))
                     .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                     .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(true).cancelable(false)
                     .icon(introIconVert, false).targetRadius(170),
                 //6 close
-                TapTarget.forView(bd.btnTopOverlay, Strings.get(R.string.tutorial_7_close_title), Strings.get(R.string.tutorial_7_close))
+                TapTarget.forView(bd.btnTopOverlay, main.getString(R.string.tutorial_7_close_title), main.getString(R.string.tutorial_7_close))
                     .outerCircleColor(R.color.GreyDark).targetCircleColor(R.color.WhiteGrey).textColor(R.color.WhiteGrey).textTypeface(Typeface.DEFAULT_BOLD)
                     .dimColor(R.color.Black).drawShadow(true).tintTarget(true).transparentTarget(false).cancelable(false)
                     .targetRadius( 80)
@@ -99,8 +97,7 @@ fun runTutorial(mContext : Context,  bd : ActivityMainBinding) {
                 }
             }).start()
     }catch (e: Exception){
-        println("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
-        showTheToast(main, Strings.get(R.string.error_tutor_tutorial))
+        showTheToast(mContext, main.getString(R.string.error_tutor_tutorial))
         boTutorialFinished = true
     }
 }
