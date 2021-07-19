@@ -5,9 +5,14 @@ For info see https://www.halonades.com/timer.html
 
 
 Upcoming version 3:
-- changed colors of counter texts for noticeable difference
-- total time counter is more white
-- darkened colors of other buttons and other timer
-- add checkVolume function, when timer is started a toast shows volume percentage
-- switched default setting big/small timer
-- starting infinity sometimes showed error message
+V changed colors of counter texts for noticeable difference
+V total time counter is more white
+V darkened colors of other buttons and other timer
+V add checkVolume function, when timer is started a toast shows volume percentage
+V switched default setting big/small timer
+V starting infinity sometimes showed error message
+V refactor code into seperate modules
+- add animations for setting buttons
+- - 1->2; 2->3; 3->1; start->inf; add->clear; clear->add
+- add loading screen with animation
+- outline some buttons for esthetics
