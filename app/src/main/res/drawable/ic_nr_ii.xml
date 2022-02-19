@@ -8,7 +8,7 @@
       android:fillColor="@color/WhiteGrey"
       android:pathData="m 6,8 v 0 6 H 4 V 8 8 6 6 0 h 2 v 6 0 z m 4,0 v 0 6 H 8 V 8 8 6 6 0 h 2 v 6 0 z"/>
 
-<!--  Seperate paths-->
+<!--  Separate paths-->
 <!--  <path-->
 <!--      android:fillColor="@color/WhiteGrey"-->
 <!--      android:pathData="m10,8v0,6H8V8,8 6,6 0h2v6,0z"/>-->

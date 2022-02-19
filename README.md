@@ -11,7 +11,7 @@ Upcoming version 3:
 - V add checkVolume function, when timer is started a toast shows volume percentage
 - V switched default setting big/small timer
 - V starting infinity sometimes showed error message
-- V refactor code into seperate modules
+- V refactor code into separate modules
 - add animations for setting buttons
 - - 1->2
 - - 2->3

@@ -15,6 +15,8 @@ object UserInstructor {
     var boTutorialFinished = false
     private var boTutorialHideToasts = false
 
+    // https://developer.android.com/guide/topics/ui/notifiers/toasts
+    // If your app targets Android 12 (API level 31) or higher, its toast is limited to two lines of text and shows the application icon next to the text.
     fun showTheToast(mainActivity: MainActivity, strToast: String, boLong: Boolean = false){
         if (boTutorialHideToasts) return
 
