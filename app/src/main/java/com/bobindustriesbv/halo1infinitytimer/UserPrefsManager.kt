@@ -12,7 +12,7 @@ object UserPrefsManager{
     const val boTimerRunning_default = false
     const val boBigTimeIsTotalTime_default = true
     const val secsToCountdownFrom_default: Long = 120 //was timSetting
-    const val secsAddedToCountdownStart_default: Long = 0
+    const val secsAddedToCountdownStart_default: Long = 1
     const val millisTimeStamp_StartToInfinity_default: Long = 0
 
     var boSettingsAvailable = boSettingsAvailable_default

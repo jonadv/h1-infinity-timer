@@ -54,7 +54,7 @@ object UserSettings {
         }
     }
     private fun adjustOffsetFromStart(ma: MainActivity, secAdjustment: Long, boSwipe: Boolean = false){
-        val secsAddingSteps = 15L
+        val secsAddingSteps = 30L
         secsOffsetFromStart = if(secAdjustment > 0){ //btnAdd or SwipeRight
             when (secsOffsetFromStart){
                 in 0 until secsMaxOffsetFromStart                                 -> secsOffsetFromStart + 1
