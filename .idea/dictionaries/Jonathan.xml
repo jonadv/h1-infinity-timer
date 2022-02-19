@@ -4,11 +4,13 @@
       <w>api</w>
       <w>backbutton</w>
       <w>biggy</w>
+      <w>bijgezet</w>
       <w>bobindustriesbv</w>
       <w>constraintlayout</w>
       <w>cortana</w>
       <w>countdowntimer</w>
       <w>cryo</w>
+      <w>deze</w>
       <w>dnum</w>
       <w>getkeepsafe</w>
       <w>halonades</w>
@@ -18,6 +20,7 @@
       <w>mediaplayer</w>
       <w>minsetting</w>
       <w>nades</w>
+      <w>niet</w>
       <w>olearyj</w>
       <w>opgeslagen</w>
       <w>perc</w>
@@ -26,7 +29,9 @@
       <w>starttime</w>
       <w>taptargetview</w>
       <w>toneplayer</w>
+      <w>versie</w>
       <w>vert</w>
+      <w>waarom</w>
     </words>
   </dictionary>
 </component>

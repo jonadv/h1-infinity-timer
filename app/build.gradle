@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
 //    buildToolsVersion "29.0.2"
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
@@ -10,14 +10,14 @@ android {
         minSdkVersion 14 //Minimum for androidx and taptargetview is 14. Tested on Samsung s2 with sdk 16. Minimum sdk Toneplayer on github said 15.
         //https://gs.statcounter.com/android-version-market-share/mobile-tablet/worldwide
         //noinspection OldTargetApi
-        targetSdkVersion 29   //29=Android10 30=Android11
+        targetSdkVersion 31   //29=Android10 30=Android11, 31= Android12
         versionCode 3
         versionName "3.00"
     }
     buildTypes {
         release {
             minifyEnabled true
-/*            shrinkResources true*/ //TODO: waarom deze er niet bijgezet bij versie 2.00? https://developer.android.com/studio/build/shrink-code
+            shrinkResources true //TODO: waarom deze er niet bijgezet bij versie 2.00? https://developer.android.com/studio/build/shrink-code
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -29,9 +29,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
     androidTestImplementation "androidx.benchmark:benchmark-junit4:1.0.0"
 }
